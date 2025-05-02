@@ -33,6 +33,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <avr/pgmspace.h>
 
 enum HighLevelError : uint16_t {
     // general errors

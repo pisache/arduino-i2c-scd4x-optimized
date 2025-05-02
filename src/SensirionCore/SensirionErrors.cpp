@@ -34,6 +34,10 @@
 #include <stdio.h>
 #include <string.h>
 
+// helper function to copy string to PROGMEM
+static void safeCopy_P(char *dst, const char *src_P, size_t len)
+{ strlcpy_P(dst, src_P, len); }
+
 void errorToString(uint16_t error, char errorMessage[],
                    size_t errorMessageSize) {
 
@@ -48,37 +52,34 @@ void errorToString(uint16_t error, char errorMessage[],
 
     switch (highLevelError) {
         case HighLevelError::NoError:
-            if (!error) {
-                strncpy(errorMessage, "No error", errorMessageSize);
-                return;
-            }
+            safeCopy_P(errorMessage, PSTR("No error"), errorMessageSize);
             break;
+
         case HighLevelError::WriteError:
             switch (lowLevelError) {
                 case LowLevelError::Undefined:
-                    strncpy(errorMessage, "Write error",
-                            errorMessageSize);
+                    safeCopy_P(errorMessage, PSTR("Write error"), errorMessageSize);
                     return;
                 case LowLevelError::SerialWriteError:
-                    strncpy(errorMessage, "Error writing to serial",
+                    safeCopy_P(errorMessage, PSTR("Error writing to serial"),
                             errorMessageSize);
                     return;
                 case LowLevelError::InternalBufferSizeError:
-                    strncpy(errorMessage,
-                            "Data too long to fit in transmit buffer",
+                    safeCopy_P(errorMessage,
+                            PSTR("Data too long to fit in transmit buffer"),
                             errorMessageSize);
                     return;
                 case LowLevelError::I2cAddressNack:
-                    strncpy(errorMessage,
-                            "Received NACK on transmit of address",
+                    safeCopy_P(errorMessage,
+                            PSTR("Received NACK on transmit of address"),
                             errorMessageSize);
                     return;
                 case LowLevelError::I2cDataNack:
-                    strncpy(errorMessage, "Received NACK on transmit of data",
+                    safeCopy_P(errorMessage, PSTR("Received NACK on transmit of data"),
                             errorMessageSize);
                     return;
                 case LowLevelError::I2cOtherError:
-                    strncpy(errorMessage, "Error writing to I2C bus",
+                    safeCopy_P(errorMessage, PSTR("Error writing to I2C bus"),
                             errorMessageSize);
                     return;
             }
@@ -86,33 +87,33 @@ void errorToString(uint16_t error, char errorMessage[],
         case HighLevelError::ReadError:
             switch (lowLevelError) {
                 case LowLevelError::Undefined:
-                    strncpy(errorMessage, "Read error", errorMessageSize);
+                    safeCopy_P(errorMessage, PSTR("Read error"), errorMessageSize);
                     return;
                 case LowLevelError::NonemptyFrameError:
-                    strncpy(errorMessage, "Frame already contains data",
+                    safeCopy_P(errorMessage, PSTR("Frame already contains data"),
                             errorMessageSize);
                     return;
                 case LowLevelError::TimeoutError:
-                    strncpy(errorMessage, "Timeout while reading data",
+                    safeCopy_P(errorMessage, PSTR("Timeout while reading data"),
                             errorMessageSize);
                     return;
                 case LowLevelError::ChecksumError:
-                    strncpy(errorMessage, "Checksum is wrong",
+                    safeCopy_P(errorMessage, PSTR("Checksum is wrong"),
                             errorMessageSize);
                     return;
                 case LowLevelError::CRCError:
-                    strncpy(errorMessage, "Wrong CRC found", errorMessageSize);
+                    safeCopy_P(errorMessage, PSTR("Wrong CRC found"), errorMessageSize);
                     return;
                 case LowLevelError::WrongNumberBytesError:
-                    strncpy(errorMessage, "Number of bytes not a multiple of 3",
+                    safeCopy_P(errorMessage, PSTR("Number of bytes not a multiple of 3"),
                             errorMessageSize);
                     return;
                 case LowLevelError::NotEnoughDataError:
-                    strncpy(errorMessage, "Not enough data received",
+                    safeCopy_P(errorMessage, PSTR("Not enough data received"),
                             errorMessageSize);
                     return;
                 case LowLevelError::InternalBufferSizeError:
-                    strncpy(errorMessage, "Internal I2C buffer too small",
+                    safeCopy_P(errorMessage, PSTR("Internal I2C buffer too small"),
                             errorMessageSize);
                     return;
             }
@@ -125,10 +126,10 @@ void errorToString(uint16_t error, char errorMessage[],
         case HighLevelError::TxFrameError:
             switch (lowLevelError) {
                 case LowLevelError::Undefined:
-                    strncpy(errorMessage, "Tx frame error", errorMessageSize);
+                    safeCopy_P(errorMessage, PSTR("Tx frame error"), errorMessageSize);
                     return;
                 case LowLevelError::BufferSizeError:
-                    strncpy(errorMessage, "Not enough space in buffer",
+                    safeCopy_P(errorMessage, PSTR("Not enough space in buffer"),
                             errorMessageSize);
                     return;
             }
@@ -136,26 +137,26 @@ void errorToString(uint16_t error, char errorMessage[],
         case HighLevelError::RxFrameError:
             switch (lowLevelError) {
                 case LowLevelError::Undefined:
-                    strncpy(errorMessage, "Rx frame error", errorMessageSize);
+                    safeCopy_P(errorMessage, PSTR("Rx frame error"), errorMessageSize);
                     return;
                 case LowLevelError::BufferSizeError:
-                    strncpy(errorMessage, "Not enough space in buffer",
+                    safeCopy_P(errorMessage, PSTR("Not enough space in buffer"),
                             errorMessageSize);
                     return;
                 case LowLevelError::NoDataError:
-                    strncpy(errorMessage, "No more data in frame",
+                    safeCopy_P(errorMessage, PSTR("No more data in frame"),
                             errorMessageSize);
                     return;
                 case LowLevelError::RxAddressError:
-                    strncpy(errorMessage, "Wrong address in return frame",
+                    safeCopy_P(errorMessage, PSTR("Wrong address in return frame"),
                             errorMessageSize);
                     return;
                 case LowLevelError::RxCommandError:
-                    strncpy(errorMessage, "Wrong command in return frame",
+                    safeCopy_P(errorMessage, PSTR("Wrong command in return frame"),
                             errorMessageSize);
                     return;
             }
     }
-    strncpy(errorMessage, "Error processing error", errorMessageSize);
+    safeCopy_P(errorMessage, PSTR("Error processing error"), errorMessageSize);
     return;
 }

@@ -3,7 +3,7 @@
 
 SensirionI2cScd4x scd4x;
 
-char errorMessage[64];
+char errorMessage[42];
 bool gasConn = false;
 
 void setup()

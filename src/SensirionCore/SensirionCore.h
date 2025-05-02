@@ -35,9 +35,11 @@
 #include "SensirionErrors.h"
 #include "SensirionRxFrame.h"
 
-#include "SensirionShdlcCommunication.h"
-#include "SensirionShdlcRxFrame.h"
-#include "SensirionShdlcTxFrame.h"
+// removing this part because we're only using I2C communication
+
+//#include "SensirionShdlcCommunication.h"
+//#include "SensirionShdlcRxFrame.h"
+//#include "SensirionShdlcTxFrame.h"
 
 #include "SensirionI2CCommunication.h"
 #include "SensirionI2CRxFrame.h"
