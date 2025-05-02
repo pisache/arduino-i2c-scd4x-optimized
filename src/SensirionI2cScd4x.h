@@ -39,7 +39,7 @@
 #ifndef SENSIRIONI2CSCD4X_H
 #define SENSIRIONI2CSCD4X_H
 
-#include <SensirionCore.h>
+#include "SensirionCore/SensirionCore.h"
 #include <Wire.h>
 
 #define SCD40_I2C_ADDR_62 0x62
