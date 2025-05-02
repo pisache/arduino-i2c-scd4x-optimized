@@ -17,16 +17,14 @@ void setup()
   if (error)
   {
     Serial.print("Stop measure error: ");
-    errorToString(error, errorMessage, sizeof(errorMessage));
-    Serial.println(errorMessage);
+    Serial.println(errorToString(error));
   }
 
   error = scd4x.startPeriodicMeasurement();
   if (error)
   {
     Serial.print("Start maesure error: ");
-    errorToString(error, errorMessage, sizeof(errorMessage));
-    Serial.println(errorMessage);
+    Serial.println(errorToString(error));
   }
   
   delay(5000);
@@ -39,9 +37,8 @@ void loop()
   uint16_t error = scd4x.getDataReadyStatus(dataReady);
   if (error) 
   {
-    errorToString(error, errorMessage, sizeof(errorMessage));
     Serial.print("Data ready check failed: ");
-    Serial.println(errorMessage);
+    Serial.println(errorToString(error));
     delay(1000);
     return;
   }
@@ -54,9 +51,8 @@ void loop()
     Serial.println("Reading MEASUREMENTS");
     if (error) 
     {
-      errorToString(error, errorMessage, sizeof(errorMessage));
       Serial.print("Read error: ");
-      Serial.println(errorMessage);
+      Serial.println(errorToString(error));
     }
     else
     {

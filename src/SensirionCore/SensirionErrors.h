@@ -83,7 +83,6 @@ enum LowLevelError : uint8_t {
  * @param errorMessageSize Size in bytes of the string buffer for the error
  *                         message.
  */
-void errorToString(uint16_t error, char errorMessage[],
-                   size_t errorMessageSize);
+const char* errorToString(uint16_t error);
 
 #endif /* _SENSIRION_ERRORS_H_ */
