@@ -1,3 +1,8 @@
+# Optimized Sensirion I²C SCD4X Arduino Library
+
+This is the optimizaed version of Sensirion SCD4X library catered to my PIO project.
+I am using ATMega328P-AU with other sensor libraries so memory optimizations was necessary.
+
 # Sensirion I²C SCD4X Arduino Library
 
 This is the Sensirion SCD4X library for Arduino allowing you to
