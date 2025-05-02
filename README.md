@@ -6,16 +6,18 @@ I am using ATMega328P-AU with other sensor libraries so memory optimizations was
 Initial optimization was done by removing `strncpy()` and `snprintf()` in `SensirionErrors`
 
 Memory usage in ATMega328P before optimization:
+
 <img src="images/before_opt.png" width="300px">
 
 Memory usage in ATMega328P after optimization:
+
 <img src="images/after_opt.png" width="300px">
 
 In the future, further optimization could be achieved by modifying I²C communication.
 trivial methods in I2CTxFrame such as `addBytes()` can be move to header as a static inline function.
 
 To optimize even more, the library should use flat C functions instead of C++ classes.
-Also, I was lazy so I just declared 
+Also, I was lazy so I just declared error message buffer as static array but declaring it dynamically depending on the size of errormessage can be tried.
 
 # Sensirion I²C SCD4X Arduino Library
 
