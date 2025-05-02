@@ -7,11 +7,11 @@ Initial optimization was done by removing `strncpy()` and `snprintf()` in `Sensi
 
 Memory usage in ATMega328P before optimization:
 
-<img src="images/before_opt.png" width="300px">
+<img src="images/before_opt.png" width="600px">
 
 Memory usage in ATMega328P after optimization:
 
-<img src="images/after_opt.png" width="300px">
+<img src="images/after_opt.png" width="600px">
 
 In the future, further optimization could be achieved by modifying I²C communication.
 trivial methods in I2CTxFrame such as `addBytes()` can be move to header as a static inline function.
